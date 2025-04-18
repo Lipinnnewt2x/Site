@@ -2,199 +2,126 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Açaí Insano - Promoção com Adicionais</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Açaí Promoção</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
+      font-family: Arial, sans-serif;
       background-color: #2e003e;
-      color: #fff;
+      color: white;
     }
 
     header {
       background-color: #4b006e;
-      padding: 20px;
       text-align: center;
+      padding: 20px;
     }
 
     header h1 {
-      font-size: 2em;
       margin: 0;
-      color: #fff600;
-      text-transform: uppercase;
+      font-size: 32px;
+      color: yellow;
     }
 
     .container {
+      max-width: 600px;
+      margin: 20px auto;
       padding: 20px;
-      text-align: center;
+      background-color: #22002e;
+      border-radius: 10px;
     }
 
     .oferta-img {
-      max-width: 100%;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      cursor: pointer;
-    }
-
-    .logo {
-      max-width: 200px;
-      margin: 20px auto;
+      width: 100%;
+      max-width: 400px;
       display: block;
+      margin: 0 auto 20px auto;
+      border-radius: 10px;
     }
 
     .descricao {
-      background-color: #3e0051;
-      border-radius: 10px;
-      padding: 20px;
+      text-align: center;
       margin-bottom: 20px;
     }
 
     .descricao h2 {
-      color: #fff600;
-    }
-
-    .descricao p {
-      font-size: 1.2em;
-      margin-top: 10px;
-    }
-
-    form {
-      background-color: #1e002a;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: left;
-      max-width: 500px;
-      margin: 0 auto 30px auto;
+      color: yellow;
     }
 
     form label {
       display: block;
       margin-top: 10px;
-      margin-bottom: 5px;
       font-weight: bold;
     }
 
     form input[type="text"],
     form input[type="tel"] {
       width: 100%;
-      padding: 10px;
+      padding: 8px;
       border-radius: 5px;
       border: none;
-      font-size: 1em;
+      margin-top: 5px;
     }
 
-    .adicionais {
-      margin-top: 15px;
+    form .checkbox-group {
+      margin: 15px 0;
     }
 
-    .adicionais label {
+    form .checkbox-group label {
       display: block;
-      margin-bottom: 8px;
       font-weight: normal;
     }
 
-    .total {
-      margin-top: 20px;
-      font-size: 1.4em;
-      font-weight: bold;
-      color: #fff600;
-    }
-
-    .btn-enviar {
-      background-color: #fff600;
-      color: #4b006e;
-      padding: 15px;
-      text-transform: uppercase;
-      font-weight: bold;
-      font-size: 1.2em;
+    form input[type="submit"] {
+      background-color: yellow;
+      color: #2e003e;
       border: none;
-      border-radius: 8px;
+      padding: 12px 20px;
+      margin-top: 15px;
+      font-size: 16px;
+      border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s;
-      margin-top: 20px;
-      width: 100%;
     }
 
-    .btn-enviar:hover {
-      background-color: #e6dc00;
-    }
-
-    footer {
-      background-color: #1e002a;
-      padding: 15px;
-      text-align: center;
-      font-size: 0.9em;
-      color: #aaa;
+    form input[type="submit"]:hover {
+      background-color: #ffea00;
     }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>2 copos de açaí por R$19,00</h1>
+    <h1>2 COPOS DE AÇAÍ POR R$19,00</h1>
   </header>
 
   <div class="container">
-    <!-- Logo Açaí Bonitona -->
-    <img src="https://postimg.cc/26GHW4pd" alt="Logo Açaí Center" class="logo" />
+    <!-- Imagem do produto (açaí) -->
+    <img src="71D6A029-A456-4C4C-A7E8-3CC0B56BAECB.png" alt="Açaí Delicioso" class="oferta-img" />
 
     <div class="descricao">
       <h2>Oferta Limitada</h2>
-      <p>2 copos de 500ml por apenas <strong>R$19,00</strong>!  
-      Escolha seus adicionais abaixo (cada um aumenta o valor):</p>
+      <p>2 copos de 500ml por apenas <strong>R$19,00</strong>! Escolha seus adicionais abaixo (cada um aumenta o valor):</p>
     </div>
 
-    <form id="formPedido" onsubmit="enviarFormulario(); return false;">
+    <form>
       <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" required />
+      <input type="text" id="nome" name="nome" required>
 
       <label for="telefone">Telefone:</label>
-      <input type="tel" id="telefone" name="telefone" required />
+      <input type="tel" id="telefone" name="telefone" required>
 
       <label for="endereco">Endereço:</label>
-      <input type="text" id="endereco" name="endereco" required />
+      <input type="text" id="endereco" name="endereco" required>
 
-      <div class="adicionais">
-        <label><input type="checkbox" value="1.00" onchange="atualizarTotal()"> Nutella (+R$1,00)</label>
-        <label><input type="checkbox" value="1.00" onchange="atualizarTotal()"> Leite condensado (+R$1,00)</label>
-        <label><input type="checkbox" value="2.00" onchange="atualizarTotal()"> Morango picado (+R$2,00)</label>
-        <label><input type="checkbox" value="2.00" onchange="atualizarTotal()"> Banana fatiada (+R$2,00)</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="adicionais" value="Nutella"> Nutella (+R$1,00)</label>
+        <label><input type="checkbox" name="adicionais" value="Leite condensado"> Leite condensado (+R$1,00)</label>
+        <label><input type="checkbox" name="adicionais" value="Paçoca"> Paçoca (+R$1,00)</label>
+        <label><input type="checkbox" name="adicionais" value="Granola"> Granola (+R$1,00)</label>
       </div>
 
-      <div class="total" id="total">Total: R$19,00</div>
-
-      <button type="submit" class="btn-enviar">Fazer meu pedido</button>
+      <input type="submit" value="Finalizar Pedido">
     </form>
   </div>
-
-  <footer>
-    &copy; 2025 - Açaí Insano | Desenvolvido na porrada por @privsolza
-  </footer>
-
-  <script>
-    function atualizarTotal() {
-      let base = 19.00;
-      const adicionais = document.querySelectorAll('.adicionais input[type="checkbox"]:checked');
-      adicionais.forEach((item) => {
-        base += parseFloat(item.value);
-      });
-      document.getElementById('total').innerText = "Total: R$" + base.toFixed(2).replace('.', ',');
-    }
-
-    function enviarFormulario() {
-      const nome = document.getElementById('nome').value;
-      const telefone = document.getElementById('telefone').value;
-      const endereco = document.getElementById('endereco').value;
-
-      if (nome && telefone && endereco) {
-        const linkCheckout = "https://seulinkcheckout.com";
-        window.location.href = linkCheckout;
-      } else {
-        alert("Preenche tudo aí, vacilão!");
-      }
-    }
-  </script>
-
 </body>
 </html>
