@@ -127,72 +127,9 @@
       font-size: 0.9em;
       color: #aaa;
     }
-
-    #modalFrete {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.85);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-
-    #modalConteudo {
-      background: #4b006e;
-      padding: 30px;
-      border-radius: 15px;
-      text-align: center;
-      max-width: 90%;
-    }
-
-    #modalConteudo input {
-      padding: 10px;
-      width: 80%;
-      margin-top: 10px;
-      border: none;
-      border-radius: 8px;
-      font-size: 1em;
-    }
-
-    #freteStatus {
-      margin-top: 15px;
-      font-size: 1.2em;
-      color: #fff600;
-    }
-
-    #confirmarBtn {
-      margin-top: 20px;
-      background-color: #fff600;
-      color: #4b006e;
-      padding: 10px 20px;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      font-size: 1.1em;
-      cursor: pointer;
-    }
-
-    #confirmarBtn:hover {
-      background-color: #e6dc00;
-    }
   </style>
 </head>
 <body>
-
-  <div id="modalFrete">
-    <div id="modalConteudo">
-      <h2>De qual cidade e estado você é?</h2>
-      <input type="text" id="cidade" placeholder="Digite sua cidade" />
-      <input type="text" id="estado" placeholder="Digite seu estado" />
-      <div id="freteStatus"></div>
-      <button id="confirmarBtn" onclick="confirmarFrete()">Confirmar</button>
-    </div>
-  </div>
 
   <header>
     <h1>2 copos de açaí por R$19,00</h1>
@@ -200,7 +137,7 @@
 
   <div class="container">
     <!-- Logo Açaí Bonitona -->
-    <img src="https://i.postimg.cc/RN26Xgpx/sua-imagem.png" alt="Logo Açaí Center" class="logo" />
+    <img src="https://postimg.cc/RN26Xgpx" alt="Logo Açaí Center" class="logo" />
 
     <div class="descricao">
       <h2>Oferta Limitada</h2>
@@ -257,12 +194,8 @@
         alert("Preenche tudo aí, vacilão!");
       }
     }
+  </script>
 
-    function confirmarFrete() {
-      const cidade = document.getElementById('cidade').value;
-      const estado = document.getElementById('estado').value;
+</body>
+</html>
 
-      if (cidade && estado) {
-        document.getElementById('freteStatus').innerText = `Frete GRÁTIS para ${cidade} - ${estado}!`;
-        setTimeout(() => {
-          document.getElementById('modalFrete').style.display = "none";
