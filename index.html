@@ -1,127 +1,291 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Açaí Promoção</title>
+  <title>Açaí do Brabo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
       background-color: #2e003e;
+      font-family: 'Poppins', sans-serif;
       color: white;
-    }
-
-    header {
-      background-color: #4b006e;
-      text-align: center;
-      padding: 20px;
-    }
-
-    header h1 {
       margin: 0;
-      font-size: 32px;
-      color: yellow;
+      padding: 0;
     }
-
+    header {
+      background-color: #4b0055;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 34px;
+      color: #ffeb3b;
+      margin: 0;
+      font-weight: 800;
+    }
+    .logo {
+      max-width: 180px;
+      margin: 20px auto;
+      display: block;
+    }
     .container {
-      max-width: 600px;
+      max-width: 800px;
       margin: 20px auto;
       padding: 20px;
-      background-color: #22002e;
+    }
+    .card {
+      background-color: #360040;
+      border-radius: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .card img {
+      width: 250px;
       border-radius: 10px;
     }
-
-    .oferta-img {
-      width: 100%;
-      max-width: 400px;
-      display: block;
-      margin: 0 auto 20px auto;
-      border-radius: 10px;
+    .card-content {
+      flex: 1;
+      text-align: left;
     }
-
-    .descricao {
+    .card-content h2 {
+      color: #ffeb3b;
+      margin-top: 0;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .frete-msg {
+      display: none;
+      background-color: #1b0029;
+      padding: 12px;
+      color: #fff600;
+      font-weight: 700;
+      border-radius: 10px;
+      margin-bottom: 15px;
       text-align: center;
-      margin-bottom: 20px;
     }
-
-    .descricao h2 {
-      color: yellow;
+    .frete-msg.active {
+      display: block;
     }
-
+    .formulario {
+      background-color: #1d0028;
+      padding: 20px;
+      border-radius: 10px;
+    }
     form label {
       display: block;
-      margin-top: 10px;
-      font-weight: bold;
+      text-align: left;
+      margin-top: 15px;
+      font-weight: 600;
     }
-
-    form input[type="text"],
-    form input[type="tel"] {
+    input, select {
       width: 100%;
-      padding: 8px;
-      border-radius: 5px;
-      border: none;
+      padding: 12px;
       margin-top: 5px;
+      border-radius: 6px;
+      border: none;
+      font-size: 15px;
+      font-family: 'Poppins', sans-serif;
+      color: #2e003e;
     }
-
-    form .checkbox-group {
-      margin: 15px 0;
+    .checkboxes {
+      margin-top: 15px;
+      text-align: left;
     }
-
-    form .checkbox-group label {
+    .checkboxes label {
       display: block;
+      margin-bottom: 5px;
       font-weight: normal;
     }
-
-    form input[type="submit"] {
-      background-color: yellow;
-      color: #2e003e;
+    button {
+      margin-top: 25px;
+      padding: 14px 25px;
+      background-color: #ffeb3b;
       border: none;
-      padding: 12px 20px;
-      margin-top: 15px;
-      font-size: 16px;
-      border-radius: 5px;
+      border-radius: 6px;
+      color: #2e003e;
+      font-size: 17px;
       cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+      font-family: 'Poppins', sans-serif;
     }
-
-    form input[type="submit"]:hover {
-      background-color: #ffea00;
+    button:hover {
+      background-color: #f2da00;
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>2 COPOS DE AÇAÍ POR R$19,00</h1>
   </header>
 
-  <div class="container">
-    <!-- Imagem do produto (açaí) -->
-    <img src="71D6A029-A456-4C4C-A7E8-3CC0B56BAECB.png" alt="Açaí Delicioso" class="oferta-img" />
+  <img src="1.jpeg" alt="Logo Açaí" class="logo" />
 
-    <div class="descricao">
-      <h2>Oferta Limitada</h2>
-      <p>2 copos de 500ml por apenas <strong>R$19,00</strong>! Escolha seus adicionais abaixo (cada um aumenta o valor):</p>
+  <div class="container">
+    <div class="card">
+      <img src="foto-produto-acai.png" alt="Açaí Delicioso">
+      <div class="card-content">
+        <h2>Oferta Limitada</h2>
+        <p>2 copos de 500ml por apenas <strong>R$19,00</strong>!<br>Escolha seus adicionais abaixo:</p>
+      </div>
     </div>
 
-    <form>
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" required>
+    <div class="formulario">
+      <div id="freteMsg" class="frete-msg">Frete GRÁTIS disponível para sua região!</div>
+      <form action="https://formsubmit.co/SEUEMAILAQUI" method="POST">
+        <label for="estado">Estado:</label>
+<select id="estado" name="estado" required onchange="verificaFrete()">
+<option value="">Selecione seu estado</option>
+<option value="AC">AC</option>
+<option value="AL">AL</option>
+<option value="AP">AP</option>
+<option value="AM">AM</option>
+<option value="BA">BA</option>
+<option value="CE">CE</option>
+<option value="DF">DF</option>
+<option value="ES">ES</option>
+<option value="GO">GO</option>
+<option value="MA">MA</option>
+<option value="MT">MT</option>
+<option value="MS">MS</option>
+<option value="MG">MG</option>
+<option value="PA">PA</option>
+<option value="PB">PB</option>
+<option value="PR">PR</option>
+<option value="PE">PE</option>
+<option value="PI">PI</option>
+<option value="RJ">RJ</option>
+<option value="RN">RN</option>
+<option value="RS">RS</option>
+<option value="RO">RO</option>
+<option value="RR">RR</option>
+<option value="SC">SC</option>
+<option value="SP">SP</option>
+<option value="SE">SE</option>
+<option value="TO">TO</option>
+</select>
+        <label for="cidade">Cidade:</label>
+<select id="cidade" name="cidade" required onchange="verificaFrete()">
+<option value="">Selecione sua cidade</option>
+<option value="Rio Branco">Rio Branco</option>
+<option value="Cruzeiro do Sul">Cruzeiro do Sul</option>
+<option value="Sena Madureira">Sena Madureira</option>
+<option value="Maceió">Maceió</option>
+<option value="Arapiraca">Arapiraca</option>
+<option value="Palmeira dos Índios">Palmeira dos Índios</option>
+<option value="Macapá">Macapá</option>
+<option value="Santana">Santana</option>
+<option value="Laranjal do Jari">Laranjal do Jari</option>
+<option value="Manaus">Manaus</option>
+<option value="Parintins">Parintins</option>
+<option value="Itacoatiara">Itacoatiara</option>
+<option value="Salvador">Salvador</option>
+<option value="Feira de Santana">Feira de Santana</option>
+<option value="Vitória da Conquista">Vitória da Conquista</option>
+<option value="Fortaleza">Fortaleza</option>
+<option value="Caucaia">Caucaia</option>
+<option value="Juazeiro do Norte">Juazeiro do Norte</option>
+<option value="Brasília">Brasília</option>
+<option value="Vitória">Vitória</option>
+<option value="Vila Velha">Vila Velha</option>
+<option value="Serra">Serra</option>
+<option value="Goiânia">Goiânia</option>
+<option value="Aparecida de Goiânia">Aparecida de Goiânia</option>
+<option value="Anápolis">Anápolis</option>
+<option value="São Luís">São Luís</option>
+<option value="Imperatriz">Imperatriz</option>
+<option value="Caxias">Caxias</option>
+<option value="Cuiabá">Cuiabá</option>
+<option value="Várzea Grande">Várzea Grande</option>
+<option value="Rondonópolis">Rondonópolis</option>
+<option value="Campo Grande">Campo Grande</option>
+<option value="Dourados">Dourados</option>
+<option value="Três Lagoas">Três Lagoas</option>
+<option value="Belo Horizonte">Belo Horizonte</option>
+<option value="Contagem">Contagem</option>
+<option value="Uberlândia">Uberlândia</option>
+<option value="Belém">Belém</option>
+<option value="Ananindeua">Ananindeua</option>
+<option value="Santarém">Santarém</option>
+<option value="João Pessoa">João Pessoa</option>
+<option value="Campina Grande">Campina Grande</option>
+<option value="Santa Rita">Santa Rita</option>
+<option value="Curitiba">Curitiba</option>
+<option value="Londrina">Londrina</option>
+<option value="Maringá">Maringá</option>
+<option value="Recife">Recife</option>
+<option value="Jaboatão dos Guararapes">Jaboatão dos Guararapes</option>
+<option value="Olinda">Olinda</option>
+<option value="Teresina">Teresina</option>
+<option value="Parnaíba">Parnaíba</option>
+<option value="Picos">Picos</option>
+<option value="Rio de Janeiro">Rio de Janeiro</option>
+<option value="Niterói">Niterói</option>
+<option value="Duque de Caxias">Duque de Caxias</option>
+<option value="Natal">Natal</option>
+<option value="Mossoró">Mossoró</option>
+<option value="Parnamirim">Parnamirim</option>
+<option value="Porto Alegre">Porto Alegre</option>
+<option value="Caxias do Sul">Caxias do Sul</option>
+<option value="Pelotas">Pelotas</option>
+<option value="Porto Velho">Porto Velho</option>
+<option value="Ji-Paraná">Ji-Paraná</option>
+<option value="Ariquemes">Ariquemes</option>
+<option value="Boa Vista">Boa Vista</option>
+<option value="Rorainópolis">Rorainópolis</option>
+<option value="Caracaraí">Caracaraí</option>
+<option value="Florianópolis">Florianópolis</option>
+<option value="Joinville">Joinville</option>
+<option value="Blumenau">Blumenau</option>
+<option value="São Paulo">São Paulo</option>
+<option value="Campinas">Campinas</option>
+<option value="Santos">Santos</option>
+<option value="Aracaju">Aracaju</option>
+<option value="Nossa Senhora do Socorro">Nossa Senhora do Socorro</option>
+<option value="Lagarto">Lagarto</option>
+<option value="Palmas">Palmas</option>
+<option value="Araguaína">Araguaína</option>
+<option value="Gurupi">Gurupi</option>
+</select>
 
-      <label for="telefone">Telefone:</label>
-      <input type="tel" id="telefone" name="telefone" required>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
 
-      <label for="endereco">Endereço:</label>
-      <input type="text" id="endereco" name="endereco" required>
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" name="telefone" required>
 
-      <div class="checkbox-group">
-        <label><input type="checkbox" name="adicionais" value="Nutella"> Nutella (+R$1,00)</label>
-        <label><input type="checkbox" name="adicionais" value="Leite condensado"> Leite condensado (+R$1,00)</label>
-        <label><input type="checkbox" name="adicionais" value="Paçoca"> Paçoca (+R$1,00)</label>
-        <label><input type="checkbox" name="adicionais" value="Granola"> Granola (+R$1,00)</label>
-      </div>
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required>
 
-      <input type="submit" value="Finalizar Pedido">
-    </form>
+        <div class="checkboxes">
+          <label><input type="checkbox" name="adicionais" value="Nutella"> Nutella (+R$1,00)</label>
+          <label><input type="checkbox" name="adicionais" value="Leite condensado"> Leite condensado (+R$1,00)</label>
+          <label><input type="checkbox" name="adicionais" value="Paçoca"> Paçoca (+R$1,00)</label>
+          <label><input type="checkbox" name="adicionais" value="Granola"> Granola (+R$1,00)</label>
+        </div>
+
+        <button type="submit">Finalizar Pedido</button>
+      </form>
+    </div>
   </div>
+
+  <script>
+    function verificaFrete() {
+      const cidade = document.getElementById("cidade").value;
+      const estado = document.getElementById("estado").value;
+      const freteBox = document.getElementById("freteMsg");
+      if (cidade && estado) {
+        freteBox.classList.add("active");
+      } else {
+        freteBox.classList.remove("active");
+      }
+    }
+  </script>
 </body>
 </html>
