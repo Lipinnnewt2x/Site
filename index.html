@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -129,6 +130,21 @@
       margin-top: 30px;
       display: none;
     }
+    #mensagemLoja {
+      display: none;
+      background: #ffeb3b;
+      color: #2e003e;
+      padding: 15px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold;
+      border-radius: 8px;
+      animation: fadeIn 1s forwards;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
     #modalOverlay {
       position: fixed;
       top: 0; left: 0;
@@ -139,6 +155,7 @@
       justify-content: center;
       align-items: center;
       z-index: 9999;
+      animation: fadeIn 1s forwards;
     }
     #modalContent {
       background: #1d0028;
@@ -183,6 +200,8 @@
 </header>
 
 <div class="container">
+  <div id="mensagemLoja"></div>
+
   <div id="produtos">
     <div class="produto" onclick="selecionarProduto(this, 'DUPLA GELADA', 19.90)">
       <img src="https://celadon-tiramisu-d0c9ae.netlify.app/9EEAB44D-E4E9-41AF-BE9A-8905B6634154.jpeg" alt="Açaí">
@@ -211,17 +230,15 @@
       <label><span>Morango</span><span>GRÁTIS</span><input type="checkbox" value="Morango"></label>
       <label><span>Banana</span><span>GRÁTIS</span><input type="checkbox" value="Banana"></label>
     </div>
-    <button onclick="finalizarPedido()">Adicionar ao Carrinho</button>
+    <button id="btnAdicionar" onclick="finalizarPedido()">Adicionar ao Carrinho</button>
   </div>
-
   <div id="resumoPedido">
     <h2>Resumo do Pedido</h2>
     <p id="resumoProduto"></p>
     <p id="resumoAdicionais"></p>
     <p id="resumoValor"></p>
-    <button onclick="finalizarCompra()">Finalizar Compra</button>
+    <button id="btnFinalizar" onclick="finalizarCompra()">Finalizar Compra</button>
   </div>
-
 </div>
 
 <script>
@@ -234,6 +251,9 @@
   const continuarBtn = document.getElementById('continuarBtn');
   const modalOverlay = document.getElementById('modalOverlay');
   const produtos = document.querySelectorAll('.produto');
+  const mensagemLoja = document.getElementById('mensagemLoja');
+  const btnAdicionar = document.getElementById('btnAdicionar');
+  const btnFinalizar = document.getElementById('btnFinalizar');
 
   const cidadesPorEstado = {
     MG: ["Belo Horizonte", "Contagem", "Betim"],
@@ -266,6 +286,8 @@
 
   continuarBtn.addEventListener('click', function() {
     modalOverlay.style.display = 'none';
+    mensagemLoja.style.display = 'block';
+    mensagemLoja.innerText = "Unidade disponível a 1,5km de sua localização. Entrega estimada em até 31 minutos.";
   });
 
   function selecionarProduto(elemento, nome, valor) {
@@ -280,26 +302,43 @@
   }
 
   function finalizarPedido() {
-    adicionaisSelecionados = [];
-    document.querySelectorAll('.adicionais input:checked').forEach(function(item) {
-      adicionaisSelecionados.push(item.value);
-    });
+    btnAdicionar.disabled = true;
+    btnAdicionar.innerText = "Adicionando...";
+    
+    setTimeout(() => {
+      adicionaisSelecionados = [];
+      document.querySelectorAll('.adicionais input:checked').forEach(function(item) {
+        adicionaisSelecionados.push(item.value);
+      });
 
-    document.getElementById('resumoProduto').innerHTML = "<strong>Produto:</strong> " + produtoSelecionado;
-    document.getElementById('resumoAdicionais').innerHTML = "<strong>Adicionais:</strong> " + (adicionaisSelecionados.length > 0 ? adicionaisSelecionados.join(", ") : "Nenhum");
-    document.getElementById('resumoValor').innerHTML = "<strong>Valor:</strong> R$" + valorSelecionado.toFixed(2);
-    document.getElementById('resumoPedido').style.display = 'block';
-    window.scrollTo(0, document.body.scrollHeight);
+      document.getElementById('resumoProduto').innerHTML = "<strong>Produto:</strong> " + produtoSelecionado;
+      document.getElementById('resumoAdicionais').innerHTML = "<strong>Adicionais:</strong> " + (adicionaisSelecionados.length > 0 ? adicionaisSelecionados.join(", ") : "Nenhum");
+      document.getElementById('resumoValor').innerHTML = "<strong>Valor:</strong> R$" + valorSelecionado.toFixed(2);
+      document.getElementById('resumoPedido').style.display = 'block';
+      
+      btnAdicionar.disabled = false;
+      btnAdicionar.innerText = "Adicionar ao Carrinho";
+
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 500);
   }
 
   function finalizarCompra() {
-    if (produtoSelecionado === "DUPLA GELADA") {
-      window.location.href = "https://checkout500ml.com"; // troque para seu link real
-    } else if (produtoSelecionado === "DUAS TORRES GELADAS") {
-      window.location.href = "https://checkout800ml.com"; // troque para seu link real
-    }
+    btnFinalizar.disabled = true;
+    btnFinalizar.innerText = "Processando...";
+
+    setTimeout(() => {
+      if (produtoSelecionado === "DUPLA GELADA") {
+        window.location.href = "https://checkout500ml.com"; // Trocar para seu link real
+      } else if (produtoSelecionado === "DUAS TORRES GELADAS") {
+        window.location.href = "https://checkout800ml.com"; // Trocar para seu link real
+      }
+    }, 1000);
   }
 </script>
 
 </body>
 </html>
+
+
+		
