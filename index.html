@@ -2,28 +2,27 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Center Açaí - Promoção Especial!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Center Açaí - Promoção Especial</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     body {
+      margin: 0;
+      padding: 0;
       background-color: #2e003e;
       font-family: 'Poppins', sans-serif;
       color: white;
-      margin: 0;
-      padding: 0;
     }
     header {
       background-color: #4b0055;
-      padding: 20px;
       text-align: center;
+      padding: 20px;
     }
     header h1 {
       font-family: 'Bebas Neue', cursive;
       font-size: 42px;
       color: #ffeb3b;
-      margin-bottom: 10px;
-      letter-spacing: 2px;
+      margin: 10px 0;
     }
     header img {
       width: 120px;
@@ -37,36 +36,45 @@
       margin: 20px auto;
       padding: 20px;
     }
-    .card-produto {
-      background-color: #1d0028;
+    .produto {
+      background: #1d0028;
       border-radius: 10px;
       display: flex;
       align-items: center;
       padding: 15px;
-      gap: 15px;
-      box-shadow: 0px 0px 12px rgba(255, 255, 255, 0.1);
       margin-bottom: 20px;
+      box-shadow: 0 0 12px rgba(255,255,255,0.1);
+      gap: 15px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border 0.3s;
     }
-    .card-produto img {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
+    .produto.selecionado {
+      border: 2px solid #ffeb3b;
+    }
+    .produto img {
+      width: 100px;
+      height: 100px;
       border-radius: 10px;
-      background-color: white;
+      background: white;
+      object-fit: cover;
     }
-    .card-produto-texto {
+    .produto-info {
       flex: 1;
     }
-    .card-produto-texto h2 {
-      font-size: 20px;
+    .produto-info h2 {
       margin: 0;
       color: #ffeb3b;
+      font-size: 20px;
     }
-    .card-produto-texto p {
-      font-size: 16px;
+    .produto-info p {
       margin-top: 8px;
+      font-size: 16px;
     }
-    form label {
+    .formulario {
+      margin-top: 30px;
+    }
+    label {
       display: block;
       margin-top: 15px;
       font-weight: 600;
@@ -78,26 +86,6 @@
       border-radius: 6px;
       border: none;
       font-size: 15px;
-      color: #2e003e;
-      font-family: 'Poppins', sans-serif;
-    }
-    input::placeholder {
-      color: #999;
-    }
-    .frete-info {
-      text-align: center;
-      font-size: 16px;
-      color: #ffeb3b;
-      margin-top: 15px;
-      margin-bottom: 10px;
-      font-weight: bold;
-    }
-    .contador {
-      text-align: center;
-      margin: 20px 0 10px 0;
-      font-size: 18px;
-      color: #ffeb3b;
-      font-weight: bold;
     }
     .adicionais {
       margin-top: 20px;
@@ -107,63 +95,87 @@
     }
     .adicionais label {
       background: #360040;
-      padding: 10px 15px;
+      padding: 10px;
       border-radius: 8px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-      border: 2px solid transparent;
-    }
-    .adicionais label:hover {
-      background-color: #4a0062;
-    }
-    .adicionais input {
-      display: none;
-    }
-    .adicionais label.selected {
-      border-color: #ffeb3b;
-    }
-    #total {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 20px;
       font-weight: bold;
+    }
+    .adicionais span:first-child {
+      margin-right: 10px;
+    }
+    .adicionais span:last-child {
       color: #ffeb3b;
+      font-weight: bold;
     }
     button {
       margin-top: 20px;
+      width: 100%;
       padding: 14px;
-      background-color: #ffeb3b;
+      background: #ffeb3b;
       color: #2e003e;
       font-size: 18px;
       font-weight: bold;
       border: none;
       border-radius: 6px;
-      width: 100%;
       cursor: pointer;
-      font-family: 'Poppins', sans-serif;
     }
-    button:hover {
-      background-color: #f2da00;
-    }
-    #pedidoSection {
+    #resumoPedido {
+      background: #1d0028;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 30px;
       display: none;
     }
-    @media (max-width: 768px) {
-      .card-produto {
-        flex-direction: column;
-        text-align: center;
-      }
-      .card-produto img {
-        width: 150px;
-        height: 150px;
-      }
+    #modalOverlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    #modalContent {
+      background: #1d0028;
+      padding: 30px 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+    #modalContent h2 {
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+    #modalContent select, #modalContent button {
+      margin-top: 15px;
     }
   </style>
 </head>
 
 <body>
+
+<!-- Modal para estado e cidade -->
+<div id="modalOverlay">
+  <div id="modalContent">
+    <h2>Encontre a loja mais próxima</h2>
+    <select id="estadoModal">
+      <option value="">Selecione o Estado</option>
+      <option value="MG">Minas Gerais</option>
+      <option value="SP">São Paulo</option>
+      <option value="RJ">Rio de Janeiro</option>
+    </select>
+    <select id="cidadeModal" style="display:none;">
+      <option value="">Selecione a Cidade</option>
+    </select>
+    <button id="continuarBtn" style="display:none;">Continuar</button>
+  </div>
+</div>
 
 <header>
   <h1>Center Açaí</h1>
@@ -171,169 +183,121 @@
 </header>
 
 <div class="container">
+  <div id="produtos">
+    <div class="produto" onclick="selecionarProduto(this, 'DUPLA GELADA', 19.90)">
+      <img src="https://celadon-tiramisu-d0c9ae.netlify.app/9EEAB44D-E4E9-41AF-BE9A-8905B6634154.jpeg" alt="Açaí">
+      <div class="produto-info">
+        <h2>DUPLA GELADA</h2>
+        <p>2 Açaís de 500ml por somente R$19,90!</p>
+      </div>
+    </div>
 
-  <div class="card-produto">
-    <img src="https://celadon-tiramisu-d0c9ae.netlify.app/9EEAB44D-E4E9-41AF-BE9A-8905B6634154.jpeg" alt="Açaí">
-    <div class="card-produto-texto">
-      <h2>DUPLA GELADA</h2>
-      <p>2 Açaís de 500ml por somente R$19,90!</p>
+    <div class="produto" onclick="selecionarProduto(this, 'DUAS TORRES GELADAS', 27.90)">
+      <img src="https://celadon-tiramisu-d0c9ae.netlify.app/9EEAB44D-E4E9-41AF-BE9A-8905B6634154.jpeg" alt="Açaí">
+      <div class="produto-info">
+        <h2>DUAS TORRES GELADAS</h2>
+        <p>2 Açaís de 800ml por somente R$27,90!</p>
+      </div>
     </div>
   </div>
 
-  <div class="formulario">
-
-    <div id="cidadeEstadoSection">
-      <h2>Encontre a loja mais próxima</h2>
-
-      <label for="estado">Estado:</label>
-      <select id="estado" required>
-        <option value="">Selecione seu Estado</option>
-        <option value="MG">Minas Gerais</option>
-        <option value="SP">São Paulo</option>
-        <option value="RJ">Rio de Janeiro</option>
-      </select>
-
-      <label for="cidade">Cidade:</label>
-      <select id="cidade" required>
-        <option value="">Selecione o Estado primeiro</option>
-      </select>
-
-      <button type="button" id="avancarBtn">Avançar</button>
+  <div id="formulario" class="formulario" style="display:none;">
+    <h2>Escolha seus adicionais</h2>
+    <div class="adicionais">
+      <label><span>Nutella</span><span>GRÁTIS</span><input type="checkbox" value="Nutella"></label>
+      <label><span>Leite Condensado</span><span>GRÁTIS</span><input type="checkbox" value="Leite Condensado"></label>
+      <label><span>Paçoca</span><span>GRÁTIS</span><input type="checkbox" value="Paçoca"></label>
+      <label><span>Granola</span><span>GRÁTIS</span><input type="checkbox" value="Granola"></label>
+      <label><span>Morango</span><span>GRÁTIS</span><input type="checkbox" value="Morango"></label>
+      <label><span>Banana</span><span>GRÁTIS</span><input type="checkbox" value="Banana"></label>
     </div>
+    <button onclick="finalizarPedido()">Adicionar ao Carrinho</button>
+  </div>
 
-    <div id="pedidoSection">
-
-      <div class="frete-info" id="freteGratis"></div>
-
-      <div class="adicionais" id="adicionaisContainer">
-        <label><span>Nutella</span><span>R$0,00</span><input type="checkbox" value="Nutella"></label>
-        <label><span>Leite Condensado</span><span>R$0,00</span><input type="checkbox" value="Leite Condensado"></label>
-        <label><span>Paçoca</span><span>R$0,00</span><input type="checkbox" value="Paçoca"></label>
-        <label><span>Granola</span><span>R$0,00</span><input type="checkbox" value="Granola"></label>
-        <label><span>Morango</span><span>R$0,00</span><input type="checkbox" value="Morango"></label>
-        <label><span>Banana</span><span>R$0,00</span><input type="checkbox" value="Banana"></label>
-        <label><span>Ovomaltine</span><span>R$0,00</span><input type="checkbox" value="Ovomaltine"></label>
-        <label><span>Coco Ralado</span><span>R$0,00</span><input type="checkbox" value="Coco Ralado"></label>
-        <label><span>Chocolate Branco</span><span>R$0,00</span><input type="checkbox" value="Chocolate Branco"></label>
-        <label><span>Mel</span><span>R$0,00</span><input type="checkbox" value="Mel"></label>
-        <label><span>Leite em Pó</span><span>R$0,00</span><input type="checkbox" value="Leite em Pó"></label>
-      </div>
-
-      <div id="total">Total: R$19,90</div>
-
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" placeholder="Exemplo: João Silva" required>
-
-      <label for="telefone">WhatsApp:</label>
-      <input type="tel" id="telefone" placeholder="Exemplo: (99) 99999-9999" required>
-
-      <label for="endereco">Rua:</label>
-      <input type="text" id="endereco" placeholder="Exemplo: Rua das Flores" required>
-
-      <label for="numero">Número:</label>
-      <input type="text" id="numero" placeholder="Exemplo: 123" required>
-
-      <label for="complemento">Complemento:</label>
-      <input type="text" id="complemento" placeholder="Exemplo: Apto 201, Casa 2" required>
-
-      <div class="contador">
-        Oferta expira em <span id="contador">05:00</span>
-      </div>
-
-      <button type="button" id="finalizarBtn" onclick="finalizarCompra()">Finalizar Compra</button>
-
-    </div>
-
+  <div id="resumoPedido">
+    <h2>Resumo do Pedido</h2>
+    <p id="resumoProduto"></p>
+    <p id="resumoAdicionais"></p>
+    <p id="resumoValor"></p>
+    <button onclick="finalizarCompra()">Finalizar Compra</button>
   </div>
 
 </div>
 
 <script>
-  const estadoSelect = document.getElementById('estado');
-  const cidadeSelect = document.getElementById('cidade');
-  const avancarBtn = document.getElementById('avancarBtn');
-  const pedidoSection = document.getElementById('pedidoSection');
-  const cidadeEstadoSection = document.getElementById('cidadeEstadoSection');
-  const freteGratis = document.getElementById('freteGratis');
-  const adicionaisContainer = document.getElementById('adicionaisContainer');
+  let produtoSelecionado = "";
+  let valorSelecionado = 0;
+  let adicionaisSelecionados = [];
+
+  const estadoModal = document.getElementById('estadoModal');
+  const cidadeModal = document.getElementById('cidadeModal');
+  const continuarBtn = document.getElementById('continuarBtn');
+  const modalOverlay = document.getElementById('modalOverlay');
+  const produtos = document.querySelectorAll('.produto');
 
   const cidadesPorEstado = {
-    MG: ["Belo Horizonte", "Contagem", "Betim", "Uberlândia", "Juiz de Fora"],
-    SP: ["São Paulo", "Campinas", "Santos", "Sorocaba", "Ribeirão Preto"],
-    RJ: ["Rio de Janeiro", "Niterói", "Petrópolis", "Nova Iguaçu", "Duque de Caxias"]
+    MG: ["Belo Horizonte", "Contagem", "Betim"],
+    SP: ["São Paulo", "Campinas", "Santos"],
+    RJ: ["Rio de Janeiro", "Niterói", "Nova Iguaçu"]
   };
 
-  estadoSelect.addEventListener('change', function() {
-    const estadoSelecionado = this.value;
-    cidadeSelect.innerHTML = '<option value="">Selecione sua Cidade</option>';
-    if (cidadesPorEstado[estadoSelecionado]) {
-      cidadesPorEstado[estadoSelecionado].forEach(function(cidade) {
+  estadoModal.addEventListener('change', function() {
+    cidadeModal.innerHTML = '<option value="">Selecione a Cidade</option>';
+    if (cidadesPorEstado[this.value]) {
+      cidadesPorEstado[this.value].forEach(function(cidade) {
         let option = document.createElement('option');
         option.value = cidade;
         option.textContent = cidade;
-        cidadeSelect.appendChild(option);
+        cidadeModal.appendChild(option);
       });
-    }
-  });
-
-  avancarBtn.addEventListener('click', () => {
-    if (estadoSelect.value && cidadeSelect.value) {
-      cidadeEstadoSection.style.display = 'none';
-      pedidoSection.style.display = 'block';
-      freteGratis.innerHTML = `Frete grátis para <strong>${cidadeSelect.value}</strong>!`;
-      startCountdown();
+      cidadeModal.style.display = 'block';
     } else {
-      alert("Por favor, selecione o Estado e a Cidade para continuar.");
+      cidadeModal.style.display = 'none';
     }
   });
 
-  adicionaisContainer.addEventListener('change', function(e) {
-    const label = e.target.closest('label');
-    if (label) {
-      if (e.target.checked) {
-        label.classList.add('selected');
-      } else {
-        label.classList.remove('selected');
-      }
+  cidadeModal.addEventListener('change', function() {
+    if (this.value) {
+      continuarBtn.style.display = 'block';
+    } else {
+      continuarBtn.style.display = 'none';
     }
   });
 
-  function finalizarCompra() {
-    const nome = document.getElementById('nome').value.trim();
-    const telefone = document.getElementById('telefone').value.trim();
-    const endereco = document.getElementById('endereco').value.trim();
-    const numero = document.getElementById('numero').value.trim();
-    const complemento = document.getElementById('complemento').value.trim();
+  continuarBtn.addEventListener('click', function() {
+    modalOverlay.style.display = 'none';
+  });
 
-    if (!nome || !telefone || !endereco || !numero || !complemento) {
-      alert("Preencha todos os campos para continuar!");
-      return;
-    }
+  function selecionarProduto(elemento, nome, valor) {
+    produtos.forEach(prod => prod.classList.remove('selecionado'));
+    elemento.classList.add('selecionado');
 
-    window.location.href = "https://SEULINKDECHECKOUT.com"; // Trocar pro seu link real
+    produtoSelecionado = nome;
+    valorSelecionado = valor;
+    document.getElementById('formulario').style.display = 'block';
+    document.getElementById('resumoPedido').style.display = 'none';
+    window.scrollTo(0, document.body.scrollHeight);
   }
 
-  function startCountdown() {
-    let duration = 5 * 60;
-    const display = document.getElementById('contador');
-    const finalizarBtn = document.getElementById('finalizarBtn');
+  function finalizarPedido() {
+    adicionaisSelecionados = [];
+    document.querySelectorAll('.adicionais input:checked').forEach(function(item) {
+      adicionaisSelecionados.push(item.value);
+    });
 
-    let timer = setInterval(() => {
-      let minutes = parseInt(duration / 60, 10);
-      let seconds = parseInt(duration % 60, 10);
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-      display.textContent = minutes + ":" + seconds;
+    document.getElementById('resumoProduto').innerHTML = "<strong>Produto:</strong> " + produtoSelecionado;
+    document.getElementById('resumoAdicionais').innerHTML = "<strong>Adicionais:</strong> " + (adicionaisSelecionados.length > 0 ? adicionaisSelecionados.join(", ") : "Nenhum");
+    document.getElementById('resumoValor').innerHTML = "<strong>Valor:</strong> R$" + valorSelecionado.toFixed(2);
+    document.getElementById('resumoPedido').style.display = 'block';
+    window.scrollTo(0, document.body.scrollHeight);
+  }
 
-      if (--duration < 0) {
-        clearInterval(timer);
-        display.textContent = "00:00";
-        finalizarBtn.disabled = true;
-        finalizarBtn.innerText = "Oferta Expirada";
-        finalizarBtn.style.backgroundColor = "#999";
-        finalizarBtn.style.cursor = "not-allowed";
-      }
-    }, 1000);
+  function finalizarCompra() {
+    if (produtoSelecionado === "DUPLA GELADA") {
+      window.location.href = "https://checkout500ml.com"; // troque para seu link real
+    } else if (produtoSelecionado === "DUAS TORRES GELADAS") {
+      window.location.href = "https://checkout800ml.com"; // troque para seu link real
+    }
   }
 </script>
 
